@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="goods">
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <div class="col-md-4">
+                    <img src="{{goods.imageUrl}}" alt="cart-image">
+                </div>
+                <div class="col-md-4">
+                    <dt><span>Name</span></dt>
+                    <dd>
+                        <span>{{goods.name}}</span>
+                    </dd>
+                    <dt><span>Price</span></dt>
+                    <dd>
+                        <span>{{goods.price}}</span>
+                    </dd>
+                    <dt><span>Manufacturer</span></dt>
+                    <dd>
+                        <span>{{goods.manufacturer}}</span>
+                    </dd>
+                    <dt><span>Description</span></dt>
+                    <dd>
+                        <span>{{goods.description}}</span>
+                    </dd>
+                </div>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-sm-8">
+        <div [ngSwitch]="isAuthenticated()">
+            <div class="alert alert-success" *ngSwitchCase="true">
+                <span id="home-logged-message" *ngIf="account"
+                > You are logged in as user "{{account.login}}". </span>
+            </div>
+
+            <div class="alert alert-warning" *ngSwitchCase="false">
+                <span>Please </span>
+                <a class="alert-link" (click)="login()">sign in</a><span> or <a class="alert-link" routerLink="register">register a new account</a>.</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <form name="searchForm" class="form-inline">
+            <div class="input-group w-100 mt-3">
+                <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Search">
+                <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                    <fa-icon [icon]="'search'"></fa-icon>
+                </button>
+                <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                    <fa-icon [icon]="'trash-alt'"></fa-icon>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row" *ngIf="goods">
+    <div class="shop-cart" *ngFor="let goods of goods ;trackBy: trackId">
+        <form name="addToCartForm" (ngSubmit)="addToCart(goods.name, goods.price, goods.imageUrl)">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{{goods.imageUrl}}" class="img-cart" alt="cart-image">
+                </div>
+                <div class="col-md-6">
+                    <p>{{goods.name}} | Price: {{goods.price}}</p>
+                    <hr class="my-4">
+                    <p>{{goods.manufacturer}}</p>
+                    <p>{{goods.description}}</p>
+                    <button id="jhi-add-to-cart" type="submit" class="btn btn-info">
+                        <fa-icon [icon]="'shopping-cart'"></fa-icon>&nbsp;<span>Buy</span>
+                    </button>
+                    <button type="button"
+                            [routerLink]="['/goods', goods.id, 'view' ]"
+                            class="btn btn-info">
+                        <fa-icon [icon]="'eye'"></fa-icon>
+                        <span class="d-none d-md-inline">Detail</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
